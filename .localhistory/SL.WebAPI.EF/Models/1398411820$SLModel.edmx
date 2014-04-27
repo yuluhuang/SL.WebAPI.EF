@@ -1,0 +1,598 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="yuluhuangModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="yuluhuangModelStoreContainer">
+    <EntitySet Name="collectTable" EntityType="yuluhuangModel.Store.collectTable" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="commanTable" EntityType="yuluhuangModel.Store.commanTable" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="infoTable" EntityType="yuluhuangModel.Store.infoTable" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="itemTable" EntityType="yuluhuangModel.Store.itemTable" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="noteTable" EntityType="yuluhuangModel.Store.noteTable" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="TaskTable" EntityType="yuluhuangModel.Store.TaskTable" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="themeTable" EntityType="yuluhuangModel.Store.themeTable" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="userTable" EntityType="yuluhuangModel.Store.userTable" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="FK_userTablecollectTable" Association="yuluhuangModel.Store.FK_userTablecollectTable">
+      <End Role="userTable" EntitySet="userTable" />
+      <End Role="collectTable" EntitySet="collectTable" />
+    </AssociationSet>
+    <AssociationSet Name="FK_userTableinfoTable" Association="yuluhuangModel.Store.FK_userTableinfoTable">
+      <End Role="userTable" EntitySet="userTable" />
+      <End Role="infoTable" EntitySet="infoTable" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TaskTableitemTable" Association="yuluhuangModel.Store.FK_TaskTableitemTable">
+      <End Role="TaskTable" EntitySet="TaskTable" />
+      <End Role="itemTable" EntitySet="itemTable" />
+    </AssociationSet>
+    <AssociationSet Name="FK_userTablenoteTable" Association="yuluhuangModel.Store.FK_userTablenoteTable">
+      <End Role="userTable" EntitySet="userTable" />
+      <End Role="noteTable" EntitySet="noteTable" />
+    </AssociationSet>
+    <AssociationSet Name="FK_themeTableTaskTable" Association="yuluhuangModel.Store.FK_themeTableTaskTable">
+      <End Role="themeTable" EntitySet="themeTable" />
+      <End Role="TaskTable" EntitySet="TaskTable" />
+    </AssociationSet>
+    <AssociationSet Name="FK_userTablethemeTable" Association="yuluhuangModel.Store.FK_userTablethemeTable">
+      <End Role="userTable" EntitySet="userTable" />
+      <End Role="themeTable" EntitySet="themeTable" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="collectTable">
+    <Key>
+      <PropertyRef Name="collectId" />
+    </Key>
+    <Property Name="collectId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="userId" Type="nvarchar" Nullable="true" MaxLength="32" />
+    <Property Name="collectName" Type="nvarchar" Nullable="true" MaxLength="100" />
+    <Property Name="description" Type="nvarchar" Nullable="true" MaxLength="300" />
+    <Property Name="url" Type="nvarchar" Nullable="true" MaxLength="300" />
+    <Property Name="time" Type="nvarchar" Nullable="true" MaxLength="13" />
+    <Property Name="taskId" Type="int" Nullable="true" />
+    <Property Name="userTable_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="commanTable">
+    <Key>
+      <PropertyRef Name="commanId" />
+      <PropertyRef Name="userId" />
+    </Key>
+    <Property Name="commanId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="userId" Type="nvarchar" Nullable="false" MaxLength="32" />
+    <Property Name="link" Type="nvarchar" Nullable="true" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="infoTable">
+    <Key>
+      <PropertyRef Name="infoId" />
+    </Key>
+    <Property Name="infoId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="infoContent" Type="nvarchar" Nullable="true" MaxLength="300" />
+    <Property Name="type" Type="nvarchar" Nullable="true" MaxLength="10" />
+    <Property Name="read" Type="bit" Nullable="true" />
+    <Property Name="time" Type="nvarchar" Nullable="true" MaxLength="13" />
+    <Property Name="userId" Type="nvarchar" Nullable="true" MaxLength="32" />
+    <Property Name="userTable_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="itemTable">
+    <Key>
+      <PropertyRef Name="itemId" />
+    </Key>
+    <Property Name="itemId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="taskId" Type="int" Nullable="true" />
+    <Property Name="oldName" Type="nvarchar" Nullable="true" MaxLength="100" />
+    <Property Name="newName" Type="nvarchar" Nullable="true" MaxLength="100" />
+    <Property Name="type" Type="nvarchar" Nullable="true" MaxLength="10" />
+    <Property Name="path1" Type="nvarchar" Nullable="true" MaxLength="300" />
+    <Property Name="path2" Type="nvarchar" Nullable="true" MaxLength="300" />
+    <Property Name="theme" Type="nvarchar" Nullable="true" MaxLength="100" />
+    <Property Name="introduce" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="sort" Type="int" Nullable="true" />
+    <Property Name="download" Type="bit" Nullable="true" />
+    <Property Name="TaskTable_taskId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="noteTable">
+    <Key>
+      <PropertyRef Name="noteId" />
+    </Key>
+    <Property Name="noteId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="userId" Type="nvarchar" Nullable="true" MaxLength="32" />
+    <Property Name="noteTitle" Type="nvarchar" Nullable="true" MaxLength="150" />
+    <Property Name="noteContent" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="noteTime" Type="nvarchar" Nullable="true" MaxLength="13" />
+    <Property Name="noteTag" Type="nvarchar" Nullable="true" MaxLength="100" />
+    <Property Name="userTable_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TaskTable">
+    <Key>
+      <PropertyRef Name="taskId" />
+    </Key>
+    <Property Name="taskId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="type" Type="nvarchar" Nullable="true" MaxLength="50" />
+    <Property Name="themeId" Type="int" Nullable="true" />
+    <Property Name="taskName" Type="nvarchar" Nullable="true" MaxLength="100" />
+    <Property Name="taskContent" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="time" Type="nvarchar" Nullable="true" MaxLength="13" />
+    <Property Name="icon" Type="nvarchar" Nullable="true" MaxLength="300" />
+    <Property Name="hits" Type="int" Nullable="true" />
+    <Property Name="point" Type="nvarchar" Nullable="true" MaxLength="2" />
+    <Property Name="themeTable_themeId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="themeTable">
+    <Key>
+      <PropertyRef Name="themeId" />
+    </Key>
+    <Property Name="themeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="type" Type="nvarchar" Nullable="true" MaxLength="50" />
+    <Property Name="themeName" Type="nvarchar" Nullable="true" MaxLength="100" />
+    <Property Name="themeContent" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="userId" Type="nvarchar" Nullable="true" MaxLength="32" />
+    <Property Name="show" Type="nvarchar" Nullable="true" MaxLength="2" />
+    <Property Name="icon" Type="nvarchar" Nullable="true" MaxLength="300" />
+    <Property Name="point" Type="nvarchar" Nullable="true" MaxLength="2" />
+    <Property Name="userTable_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="userTable">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="userId" Type="nvarchar" Nullable="false" MaxLength="32" />
+    <Property Name="password" Type="nvarchar" Nullable="false" MaxLength="32" />
+    <Property Name="salt" Type="nvarchar" Nullable="false" MaxLength="32" />
+    <Property Name="name" Type="nvarchar" Nullable="true" MaxLength="10" />
+    <Property Name="QQ" Type="nvarchar" Nullable="true" MaxLength="30" />
+    <Property Name="phone" Type="nvarchar" Nullable="true" MaxLength="20" />
+    <Property Name="Email" Type="nvarchar" Nullable="true" MaxLength="50" />
+    <Property Name="icon" Type="nvarchar" Nullable="true" MaxLength="300" />
+    <Property Name="introduction" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="motto" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="indentity" Type="nvarchar" Nullable="true" MaxLength="20" />
+  </EntityType>
+  <Association Name="FK_userTablecollectTable">
+    <End Role="userTable" Type="yuluhuangModel.Store.userTable" Multiplicity="1" />
+    <End Role="collectTable" Type="yuluhuangModel.Store.collectTable" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="userTable">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="collectTable">
+        <PropertyRef Name="userTable_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_userTableinfoTable">
+    <End Role="userTable" Type="yuluhuangModel.Store.userTable" Multiplicity="1" />
+    <End Role="infoTable" Type="yuluhuangModel.Store.infoTable" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="userTable">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="infoTable">
+        <PropertyRef Name="userTable_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TaskTableitemTable">
+    <End Role="TaskTable" Type="yuluhuangModel.Store.TaskTable" Multiplicity="1" />
+    <End Role="itemTable" Type="yuluhuangModel.Store.itemTable" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TaskTable">
+        <PropertyRef Name="taskId" />
+      </Principal>
+      <Dependent Role="itemTable">
+        <PropertyRef Name="TaskTable_taskId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_userTablenoteTable">
+    <End Role="userTable" Type="yuluhuangModel.Store.userTable" Multiplicity="1" />
+    <End Role="noteTable" Type="yuluhuangModel.Store.noteTable" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="userTable">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="noteTable">
+        <PropertyRef Name="userTable_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_themeTableTaskTable">
+    <End Role="themeTable" Type="yuluhuangModel.Store.themeTable" Multiplicity="1" />
+    <End Role="TaskTable" Type="yuluhuangModel.Store.TaskTable" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="themeTable">
+        <PropertyRef Name="themeId" />
+      </Principal>
+      <Dependent Role="TaskTable">
+        <PropertyRef Name="themeTable_themeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_userTablethemeTable">
+    <End Role="userTable" Type="yuluhuangModel.Store.userTable" Multiplicity="1" />
+    <End Role="themeTable" Type="yuluhuangModel.Store.themeTable" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="userTable">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="themeTable">
+        <PropertyRef Name="userTable_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="yuluhuangModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Collection">
+          <Key>
+            <PropertyRef Name="collectId" />
+          </Key>
+          <Property Name="collectId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="userId" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
+          <Property Name="collectName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="description" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="url" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="time" Type="String" MaxLength="13" FixedLength="false" Unicode="true" />
+          <Property Name="taskId" Type="Int32" />
+          <Property Name="userTable_Id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="userTable" Relationship="Self.FK_userTablecollectTable" FromRole="collectTable" ToRole="userTable" />
+        </EntityType>
+        <EntityType Name="Comman">
+          <Key>
+            <PropertyRef Name="commanId" />
+            <PropertyRef Name="userId" />
+          </Key>
+          <Property Name="commanId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="userId" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="link" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Info">
+          <Key>
+            <PropertyRef Name="infoId" />
+          </Key>
+          <Property Name="infoId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="infoContent" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="type" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="read" Type="Boolean" />
+          <Property Name="time" Type="String" MaxLength="13" FixedLength="false" Unicode="true" />
+          <Property Name="userId" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
+          <Property Name="userTable_Id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="userTable" Relationship="Self.FK_userTableinfoTable" FromRole="infoTable" ToRole="userTable" />
+        </EntityType>
+        <EntityType Name="Item">
+          <Key>
+            <PropertyRef Name="itemId" />
+          </Key>
+          <Property Name="itemId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="taskId" Type="Int32" />
+          <Property Name="oldName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="newName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="type" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="path1" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="path2" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="theme" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="introduce" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="sort" Type="Int32" />
+          <Property Name="download" Type="Boolean" />
+          <Property Name="TaskTable_taskId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="TaskTable" Relationship="Self.FK_TaskTableitemTable" FromRole="itemTable" ToRole="TaskTable" />
+        </EntityType>
+        <EntityType Name="Note">
+          <Key>
+            <PropertyRef Name="noteId" />
+          </Key>
+          <Property Name="noteId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="userId" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
+          <Property Name="noteTitle" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="noteContent" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="noteTime" Type="String" MaxLength="13" FixedLength="false" Unicode="true" />
+          <Property Name="noteTag" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="userTable_Id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="userTable" Relationship="Self.FK_userTablenoteTable" FromRole="noteTable" ToRole="userTable" />
+        </EntityType>
+        <EntityType Name="Task">
+          <Key>
+            <PropertyRef Name="taskId" />
+          </Key>
+          <Property Name="taskId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="themeId" Type="Int32" />
+          <Property Name="taskName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="taskContent" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="time" Type="String" MaxLength="13" FixedLength="false" Unicode="true" />
+          <Property Name="icon" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="hits" Type="Int32" />
+          <Property Name="point" Type="String" MaxLength="2" FixedLength="false" Unicode="true" />
+          <Property Name="themeTable_themeId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="itemTable" Relationship="Self.FK_TaskTableitemTable" FromRole="TaskTable" ToRole="itemTable" />
+          <NavigationProperty Name="themeTable" Relationship="Self.FK_themeTableTaskTable" FromRole="TaskTable" ToRole="themeTable" />
+        </EntityType>
+        <EntityType Name="Theme">
+          <Key>
+            <PropertyRef Name="themeId" />
+          </Key>
+          <Property Name="themeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="themeName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="themeContent" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="userId" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
+          <Property Name="show" Type="String" MaxLength="2" FixedLength="false" Unicode="true" />
+          <Property Name="icon" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="point" Type="String" MaxLength="2" FixedLength="false" Unicode="true" />
+          <Property Name="userTable_Id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="TaskTable" Relationship="Self.FK_themeTableTaskTable" FromRole="themeTable" ToRole="TaskTable" />
+          <NavigationProperty Name="userTable" Relationship="Self.FK_userTablethemeTable" FromRole="themeTable" ToRole="userTable" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="userId" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="password" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="salt" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="QQ" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="phone" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="icon" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="introduction" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="motto" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="indentity" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="collectTable" Relationship="Self.FK_userTablecollectTable" FromRole="userTable" ToRole="collectTable" />
+          <NavigationProperty Name="infoTable" Relationship="Self.FK_userTableinfoTable" FromRole="userTable" ToRole="infoTable" />
+          <NavigationProperty Name="noteTable" Relationship="Self.FK_userTablenoteTable" FromRole="userTable" ToRole="noteTable" />
+          <NavigationProperty Name="themeTable" Relationship="Self.FK_userTablethemeTable" FromRole="userTable" ToRole="themeTable" />
+        </EntityType>
+        <Association Name="FK_userTablecollectTable">
+          <End Role="userTable" Type="yuluhuangModel.User" Multiplicity="1" />
+          <End Role="collectTable" Type="yuluhuangModel.Collection" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="userTable">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="collectTable">
+              <PropertyRef Name="userTable_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_userTableinfoTable">
+          <End Role="userTable" Type="yuluhuangModel.User" Multiplicity="1" />
+          <End Role="infoTable" Type="yuluhuangModel.Info" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="userTable">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="infoTable">
+              <PropertyRef Name="userTable_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TaskTableitemTable">
+          <End Role="TaskTable" Type="yuluhuangModel.Task" Multiplicity="1" />
+          <End Role="itemTable" Type="yuluhuangModel.Item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TaskTable">
+              <PropertyRef Name="taskId" />
+            </Principal>
+            <Dependent Role="itemTable">
+              <PropertyRef Name="TaskTable_taskId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_userTablenoteTable">
+          <End Role="userTable" Type="yuluhuangModel.User" Multiplicity="1" />
+          <End Role="noteTable" Type="yuluhuangModel.Note" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="userTable">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="noteTable">
+              <PropertyRef Name="userTable_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_themeTableTaskTable">
+          <End Role="themeTable" Type="yuluhuangModel.Theme" Multiplicity="1" />
+          <End Role="TaskTable" Type="yuluhuangModel.Task" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="themeTable">
+              <PropertyRef Name="themeId" />
+            </Principal>
+            <Dependent Role="TaskTable">
+              <PropertyRef Name="themeTable_themeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_userTablethemeTable">
+          <End Role="userTable" Type="yuluhuangModel.User" Multiplicity="1" />
+          <End Role="themeTable" Type="yuluhuangModel.Theme" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="userTable">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="themeTable">
+              <PropertyRef Name="userTable_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="yuluhuangEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="collectTable" EntityType="yuluhuangModel.Collection" />
+          <EntitySet Name="commanTable" EntityType="yuluhuangModel.Comman" />
+          <EntitySet Name="infoTable" EntityType="yuluhuangModel.Info" />
+          <EntitySet Name="itemTable" EntityType="yuluhuangModel.Item" />
+          <EntitySet Name="noteTable" EntityType="yuluhuangModel.Note" />
+          <EntitySet Name="TaskTable" EntityType="yuluhuangModel.Task" />
+          <EntitySet Name="themeTable" EntityType="yuluhuangModel.Theme" />
+          <EntitySet Name="userTable" EntityType="yuluhuangModel.User" />
+          <AssociationSet Name="FK_userTablecollectTable" Association="Self.FK_userTablecollectTable">
+            <End Role="userTable" EntitySet="userTable" />
+            <End Role="collectTable" EntitySet="collectTable" />
+          </AssociationSet>
+          <AssociationSet Name="FK_userTableinfoTable" Association="Self.FK_userTableinfoTable">
+            <End Role="userTable" EntitySet="userTable" />
+            <End Role="infoTable" EntitySet="infoTable" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TaskTableitemTable" Association="Self.FK_TaskTableitemTable">
+            <End Role="TaskTable" EntitySet="TaskTable" />
+            <End Role="itemTable" EntitySet="itemTable" />
+          </AssociationSet>
+          <AssociationSet Name="FK_userTablenoteTable" Association="Self.FK_userTablenoteTable">
+            <End Role="userTable" EntitySet="userTable" />
+            <End Role="noteTable" EntitySet="noteTable" />
+          </AssociationSet>
+          <AssociationSet Name="FK_themeTableTaskTable" Association="Self.FK_themeTableTaskTable">
+            <End Role="themeTable" EntitySet="themeTable" />
+            <End Role="TaskTable" EntitySet="TaskTable" />
+          </AssociationSet>
+          <AssociationSet Name="FK_userTablethemeTable" Association="Self.FK_userTablethemeTable">
+            <End Role="userTable" EntitySet="userTable" />
+            <End Role="themeTable" EntitySet="themeTable" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="yuluhuangModelStoreContainer" CdmEntityContainer="yuluhuangEntities">
+    <EntitySetMapping Name="collectTable">
+      <EntityTypeMapping TypeName="IsTypeOf(yuluhuangModel.Collection)">
+        <MappingFragment StoreEntitySet="collectTable">
+          <ScalarProperty Name="collectId" ColumnName="collectId" />
+          <ScalarProperty Name="userId" ColumnName="userId" />
+          <ScalarProperty Name="collectName" ColumnName="collectName" />
+          <ScalarProperty Name="description" ColumnName="description" />
+          <ScalarProperty Name="url" ColumnName="url" />
+          <ScalarProperty Name="time" ColumnName="time" />
+          <ScalarProperty Name="taskId" ColumnName="taskId" />
+          <ScalarProperty Name="userTable_Id" ColumnName="userTable_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="commanTable">
+      <EntityTypeMapping TypeName="IsTypeOf(yuluhuangModel.Comman)">
+        <MappingFragment StoreEntitySet="commanTable">
+          <ScalarProperty Name="commanId" ColumnName="commanId" />
+          <ScalarProperty Name="userId" ColumnName="userId" />
+          <ScalarProperty Name="link" ColumnName="link" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="infoTable">
+      <EntityTypeMapping TypeName="IsTypeOf(yuluhuangModel.Info)">
+        <MappingFragment StoreEntitySet="infoTable">
+          <ScalarProperty Name="infoId" ColumnName="infoId" />
+          <ScalarProperty Name="infoContent" ColumnName="infoContent" />
+          <ScalarProperty Name="type" ColumnName="type" />
+          <ScalarProperty Name="read" ColumnName="read" />
+          <ScalarProperty Name="time" ColumnName="time" />
+          <ScalarProperty Name="userId" ColumnName="userId" />
+          <ScalarProperty Name="userTable_Id" ColumnName="userTable_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="itemTable">
+      <EntityTypeMapping TypeName="IsTypeOf(yuluhuangModel.Item)">
+        <MappingFragment StoreEntitySet="itemTable">
+          <ScalarProperty Name="itemId" ColumnName="itemId" />
+          <ScalarProperty Name="taskId" ColumnName="taskId" />
+          <ScalarProperty Name="oldName" ColumnName="oldName" />
+          <ScalarProperty Name="newName" ColumnName="newName" />
+          <ScalarProperty Name="type" ColumnName="type" />
+          <ScalarProperty Name="path1" ColumnName="path1" />
+          <ScalarProperty Name="path2" ColumnName="path2" />
+          <ScalarProperty Name="theme" ColumnName="theme" />
+          <ScalarProperty Name="introduce" ColumnName="introduce" />
+          <ScalarProperty Name="sort" ColumnName="sort" />
+          <ScalarProperty Name="download" ColumnName="download" />
+          <ScalarProperty Name="TaskTable_taskId" ColumnName="TaskTable_taskId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="noteTable">
+      <EntityTypeMapping TypeName="IsTypeOf(yuluhuangModel.Note)">
+        <MappingFragment StoreEntitySet="noteTable">
+          <ScalarProperty Name="noteId" ColumnName="noteId" />
+          <ScalarProperty Name="userId" ColumnName="userId" />
+          <ScalarProperty Name="noteTitle" ColumnName="noteTitle" />
+          <ScalarProperty Name="noteContent" ColumnName="noteContent" />
+          <ScalarProperty Name="noteTime" ColumnName="noteTime" />
+          <ScalarProperty Name="noteTag" ColumnName="noteTag" />
+          <ScalarProperty Name="userTable_Id" ColumnName="userTable_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TaskTable">
+      <EntityTypeMapping TypeName="IsTypeOf(yuluhuangModel.Task)">
+        <MappingFragment StoreEntitySet="TaskTable">
+          <ScalarProperty Name="taskId" ColumnName="taskId" />
+          <ScalarProperty Name="type" ColumnName="type" />
+          <ScalarProperty Name="themeId" ColumnName="themeId" />
+          <ScalarProperty Name="taskName" ColumnName="taskName" />
+          <ScalarProperty Name="taskContent" ColumnName="taskContent" />
+          <ScalarProperty Name="time" ColumnName="time" />
+          <ScalarProperty Name="icon" ColumnName="icon" />
+          <ScalarProperty Name="hits" ColumnName="hits" />
+          <ScalarProperty Name="point" ColumnName="point" />
+          <ScalarProperty Name="themeTable_themeId" ColumnName="themeTable_themeId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="themeTable">
+      <EntityTypeMapping TypeName="IsTypeOf(yuluhuangModel.Theme)">
+        <MappingFragment StoreEntitySet="themeTable">
+          <ScalarProperty Name="themeId" ColumnName="themeId" />
+          <ScalarProperty Name="type" ColumnName="type" />
+          <ScalarProperty Name="themeName" ColumnName="themeName" />
+          <ScalarProperty Name="themeContent" ColumnName="themeContent" />
+          <ScalarProperty Name="userId" ColumnName="userId" />
+          <ScalarProperty Name="show" ColumnName="show" />
+          <ScalarProperty Name="icon" ColumnName="icon" />
+          <ScalarProperty Name="point" ColumnName="point" />
+          <ScalarProperty Name="userTable_Id" ColumnName="userTable_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="userTable">
+      <EntityTypeMapping TypeName="IsTypeOf(yuluhuangModel.User)">
+        <MappingFragment StoreEntitySet="userTable">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="userId" ColumnName="userId" />
+          <ScalarProperty Name="password" ColumnName="password" />
+          <ScalarProperty Name="salt" ColumnName="salt" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="QQ" ColumnName="QQ" />
+          <ScalarProperty Name="phone" ColumnName="phone" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="icon" ColumnName="icon" />
+          <ScalarProperty Name="introduction" ColumnName="introduction" />
+          <ScalarProperty Name="motto" ColumnName="motto" />
+          <ScalarProperty Name="indentity" ColumnName="indentity" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="无" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
