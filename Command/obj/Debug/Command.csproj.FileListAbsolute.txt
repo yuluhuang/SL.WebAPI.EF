@@ -1,0 +1,5 @@
+E:\CTOD\文档\GitHub\SL.WebAPI.EF\Command\bin\Debug\Command.dll
+E:\CTOD\文档\GitHub\SL.WebAPI.EF\Command\bin\Debug\Command.pdb
+E:\CTOD\文档\GitHub\SL.WebAPI.EF\Command\obj\Debug\Command.dll
+E:\CTOD\文档\GitHub\SL.WebAPI.EF\Command\obj\Debug\Command.pdb
+E:\CTOD\文档\GitHub\SL.WebAPI.EF\Command\obj\Debug\Command.csprojResolveAssemblyReference.cache
